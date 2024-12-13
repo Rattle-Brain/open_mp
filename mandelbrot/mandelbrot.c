@@ -30,8 +30,9 @@ complex number to escape the circle.
 int mandelbrot(double complex c) {
     double complex z = 0;
     int iter;
+    // Think we can parallelize this loop? Why or why not?
     for (iter = 0; iter < MAX_ITER; iter++) {
-        if (cabs(z) > 3.0) break;
+        if (cabs(z) > 2.0) break;   // Maybe this break statement is a problem?
         z = z * z + c;
     }
     return iter;
@@ -40,7 +41,6 @@ int mandelbrot(double complex c) {
 int main() {
     int *image = (int *)malloc(WIDTH * HEIGHT * sizeof(int));
 
-    // Using this function is not required. It could also be done with the C time_t and ctime
     clock_t start_time = clock();
 
     for (int y = 0; y < HEIGHT; y++) {
